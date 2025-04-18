@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  dhcp-server:
+    build: .
+    container_name: dhcp-server
+    network_mode: "host"  # Required for DHCP to work properly
+    cap_add:
+      - NET_ADMIN  # Required for network configuration
+      - NET_RAW    # Required for raw socket access
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs  # For persistent logging 
